@@ -1,0 +1,22 @@
+.course-item {
+    margin: 10px;
+}
+
+.content-right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.action-btn {
+    width: 80px;
+    margin: 5px;
+}
