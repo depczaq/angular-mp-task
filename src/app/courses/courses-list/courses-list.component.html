@@ -1,4 +1,7 @@
 <app-courses-toolbar></app-courses-toolbar>
 <div class="courses-list">
-  <app-course-item *ngFor="let item of coursesList" [courseItem]="item"></app-course-item>
+  <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (courseDeleted)="removeFromList($event)"></app-course-item>
+  <div class="card load-more">
+    <button type="button" (click)="loadMore()" class="btn btn-link">Load more</button>
+  </div>
 </div>

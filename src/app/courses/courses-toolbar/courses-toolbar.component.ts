@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-courses-toolbar',
@@ -12,4 +12,7 @@ export class CoursesToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  public runSearch(text: string) {
+    console.log(text);
+  }
 }
