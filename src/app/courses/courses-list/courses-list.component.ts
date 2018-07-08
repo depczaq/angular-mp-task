@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, DoCheck, OnDestroy, SimpleChanges } from '@angular/core';
-import { Course } from '../course.model';
-import { CoursesService } from '../courses.service';
+import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Course } from 'app/courses/course.model';
+import { CoursesService } from 'app/courses/courses.service';
 
 @Component({
   selector: 'app-courses-list',

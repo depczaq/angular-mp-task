@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CoursesToolbarComponent } from './courses-toolbar.component';
 import { FormsModule } from '@angular/forms';
+import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-toolbar.component';
 
 describe('CoursesToolbarComponent', () => {
   let component: CoursesToolbarComponent;

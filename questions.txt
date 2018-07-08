@@ -1,0 +1,7 @@
+1. What's the difference between those two?
+    a. beforeEach((() => {})
+    b. beforeEach(async(() => {})
+
+2. How to test lifecycle hook methods (i.e. in the CoursesListComponent)?
+
+3. How to debug unit test (and not only unit tests)?

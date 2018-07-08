@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from './user.model';
-import { BasicUser } from './basic-user.model';
-
+import { BasicUser } from 'app/core/basic-user.model';
+import { User } from 'app/core/user.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +8,7 @@ export class UserService {
 
   constructor() { }
 
-  public getLoggedUser (): User {
+  public getLoggedUser(): User {
     return new BasicUser(1, "Miłosz", "Depczyński");
   }
 }
