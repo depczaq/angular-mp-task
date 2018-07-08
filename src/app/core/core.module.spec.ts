@@ -1,4 +1,4 @@
-import { CoreModule } from './core.module';
+import { CoreModule } from 'app/core/core.module';
 
 describe('CoreModule', () => {
   let coreModule: CoreModule;

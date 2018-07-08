@@ -1,9 +1,9 @@
-import { Component, DebugElement } from "@angular/core";
-import { CourseItemComponent } from "./course-item.component";
-import { Course } from "../course.model";
-import { BasicCourse } from "../basic-course";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { BasicCourse } from 'app/courses/basic-course';
+import { CourseItemComponent } from 'app/courses/course-item/course-item.component';
+import { Course } from 'app/courses/course.model';
 
 @Component({
   template:
@@ -43,7 +43,7 @@ describe('CourseItemComponent', () => {
 
     spyOn(testHost, 'removeCourse');
     deleteButton.click();
-   
+
     expect(testHost.removeCourse).toHaveBeenCalled();
   });
 
@@ -57,7 +57,7 @@ describe('CourseItemComponent', () => {
     expect(deleteButton).toBeTruthy();
 
     deleteButton.triggerEventHandler('click', null);
-   
+
     expect(testHost.deletedCourse).toBe(expectedRemovedCourse);
   });
 

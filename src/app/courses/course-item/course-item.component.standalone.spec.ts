@@ -1,10 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CourseItemComponent } from './course-item.component';
-import { FormsModule } from '@angular/forms';
-import { Course } from '../course.model';
 import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { CourseItemComponent } from 'app/courses/course-item/course-item.component';
+import { Course } from 'app/courses/course.model';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;

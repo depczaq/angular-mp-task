@@ -1,9 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { CoursesModule } from './courses/courses.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from 'app/app.component';
+import { CoreModule } from 'app/core/core.module';
+import { CoursesModule } from 'app/courses/courses.module';
 
 @NgModule({
   declarations: [
