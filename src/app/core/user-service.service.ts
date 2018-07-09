@@ -9,6 +9,10 @@ export class UserService {
   constructor() { }
 
   public getLoggedUser(): User {
-    return new BasicUser(1, "Miłosz", "Depczyński");
+    return new BasicUser({
+      id: 1,
+      firstName: "Miłosz",
+      lastName: "Depczyński"
+    });
   }
 }
