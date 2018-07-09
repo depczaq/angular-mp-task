@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   private loggedUser: User;
 
-  constructor(userService: UserService) {
+  constructor(private userService: UserService) {
     this.loggedUser = userService.getLoggedUser();
   }
 
