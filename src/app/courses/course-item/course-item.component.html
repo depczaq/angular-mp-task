@@ -4,7 +4,7 @@
       <div class="col-10">
         <div class="row">
           <div class="col-6">
-            <h5 class="card-title"> {{courseItem.title}}</h5>
+            <h5 class="card-title"> {{courseItem.title | uppercase}}</h5>
           </div>
           <div class="col-3">Duration: {{courseItem.duration}} min</div>
           <div class="col-3 text-right">{{courseItem.creationDate | date : "MM.dd.yyyy"}} </div>
