@@ -20,3 +20,8 @@
     width: 80px;
     margin: 5px;
 }
+
+.top-rated-badge {
+    font-size: 50%;
+    vertical-align: middle;
+}

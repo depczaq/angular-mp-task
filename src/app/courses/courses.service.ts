@@ -28,7 +28,8 @@ export class CoursesService {
       description: "Hegel is arguing that the reality is merely an a priori adjunct of non-naturalistic "
         + " ethics, Kant via the categorical imperative is holding that ontologically it "
         + " exists only in the imagination, and Marx claims it was offside. Not necessarily. "
-        + " I could be arguing in my spare time."
+        + " I could be arguing in my spare time.",
+      topRated: true
     });
 
     const c3: Course = new BasicCourse({
@@ -46,7 +47,8 @@ export class CoursesService {
       creationDate: new Date(2018, 3, 11),
       duration: 84,
       description: "We interrupt this program to annoy you and make things generally irritating. "
-        + " I object to all this sex on the television. I mean, I keep falling off!"
+        + " I object to all this sex on the television. I mean, I keep falling off!",
+      topRated: true
     });
 
     const c5: Course = new BasicCourse({
@@ -91,7 +93,8 @@ export class CoursesService {
         + " his protest up to the church door in fifteen-seventeen, he may not have "
         + " realised the full significance of what he was doing, but four hundred years"
         + "  later, thanks to him, my dear, I can wear whatever I want on my "
-        + " John Thomas..."
+        + " John Thomas...",
+      topRated: true
     });
 
     return [c1, c2, c3, c4, c5, c6, c7, c8];
