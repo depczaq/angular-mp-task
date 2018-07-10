@@ -1,7 +1,12 @@
 <app-courses-toolbar></app-courses-toolbar>
 <div class="courses-list">
   <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (courseDeleted)="removeFromList($event)"></app-course-item>
-  <div class="card load-more">
+  <div *ngIf="coursesList.length == 0" class="card no-search-results">
+    <div class="card-body">
+      <p>No video courses found.</p>
+    </div>
+  </div>
+  <div *ngIf="coursesList.length > 0" class="card load-more">
     <button type="button" (click)="loadMore()" class="btn btn-link">Load more</button>
   </div>
 </div>
