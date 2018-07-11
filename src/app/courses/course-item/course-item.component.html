@@ -8,7 +8,7 @@
               <span *ngIf="courseItem.topRated" class="badge badge-primary top-rated-badge">TOP RATED</span>
             </h5>
           </div>
-          <div class="col-3">Duration: {{courseItem.duration}} min</div>
+          <div class="col-3">Duration: {{courseItem.duration | duration}}</div>
           <div class="col-3 text-right">{{courseItem.creationDate | date : "dd.MM.yyyy"}} </div>
         </div>
         <div class="row">
