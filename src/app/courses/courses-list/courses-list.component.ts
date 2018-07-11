@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { Course } from 'app/courses/course.model';
 import { CoursesService } from 'app/courses/courses.service';
 
@@ -8,9 +9,12 @@ import { CoursesService } from 'app/courses/courses.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
+  public allCoursesList: Course[];
   public coursesList: Course[];
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService,
+    private searchFilterPipe: CoursesFilterPipe) {
+    this.allCoursesList = [];
     this.coursesList = [];
   }
 
@@ -20,7 +24,8 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   ngOnInit() {
     console.log("LIFECYCLE ngOnInit");
-    this.coursesList = this.coursesService.getCoursesList();
+    this.allCoursesList = this.coursesService.getCoursesList();
+    this.coursesList = this.allCoursesList;
   }
 
   ngDoCheck(): void {
@@ -37,5 +42,13 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   public loadMore() {
     console.log("Load more");
+  }
+
+  public filterResults(searchQuery: string) {
+    if (searchQuery) {
+      this.coursesList = this.searchFilterPipe.transform(this.allCoursesList, searchQuery);
+    } else {
+      this.coursesList = this.allCoursesList;
+    }
   }
 }

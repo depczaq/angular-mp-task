@@ -1,4 +1,4 @@
-<app-courses-toolbar></app-courses-toolbar>
+<app-courses-toolbar (searchExecuted)="filterResults($event)"></app-courses-toolbar>
 <div class="courses-list">
   <app-course-item *ngFor="let item of coursesList" [courseItem]="item" (courseDeleted)="removeFromList($event)"></app-course-item>
   <div *ngIf="coursesList.length == 0" class="card no-search-results">
