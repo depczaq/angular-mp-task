@@ -1,5 +1,6 @@
 .course-item {
     margin: 10px;
+    border-width: 2px;
 }
 
 .content-right {
@@ -24,4 +25,13 @@
 .top-rated-badge {
     font-size: 50%;
     vertical-align: middle;
+}
+
+.card.new-course-item {
+    border-color: red;
+}
+
+
+.card.upcoming-course-item {
+    border-color: lightgreen;
 }

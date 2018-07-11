@@ -12,7 +12,7 @@ export class CoursesService {
     const c1: Course = new BasicCourse({
       id: 1,
       title: "Video course 1",
-      creationDate: new Date(2018, 0, 1),
+      creationDate: new Date(2018, 6, 10),
       duration: 25,
       description: "Come and see the violence inherent in the system. Help! Help! I'm being repressed!"
         + " Oh, king eh? Very nice. And how'd you get that, eh? By exploiting the workers."
@@ -65,7 +65,7 @@ export class CoursesService {
     const c6: Course = new BasicCourse({
       id: 6,
       title: "Video course 6",
-      creationDate: new Date(2018, 11, 17),
+      creationDate: new Date(2018, 5, 17),
       duration: 19,
       description: "It's a Mr. Death, dear. He's here about the reaping. I'm not a roman mum, "
         + " I'm a kike, a yid, a heebie, a hook-nose, I'm kosher mum, I'm a Red Sea "
@@ -76,7 +76,7 @@ export class CoursesService {
     const c7: Course = new BasicCourse({
       id: 7,
       title: "Video course 7",
-      creationDate: new Date(2018, 3, 5),
+      creationDate: new Date(2018, 6, 5),
       duration: 78,
       description: "Hey! Your nose is going to be three foot wide across your face by the time "
         + " I'm finished with you!"

@@ -13,7 +13,10 @@ import { Course } from 'app/courses/course.model';
     </app-course-item>`
 })
 export class TestCourseItemComponentHost {
-  public course: Course = new BasicCourse(1, "Test course", new Date(2018, 1, 2), 67, "Description");
+  public course: Course = new BasicCourse({
+    id: 1, name: "Test course", createionDate: new Date(2018, 1, 2),
+    duration: 67, description: "Description"
+  });
   public deletedCourse: Course;
   constructor() { };
   public removeCourse(course: Course) { this.deletedCourse = course };
@@ -49,7 +52,10 @@ describe('CourseItemComponent', () => {
 
   it('delete button should remove course', () => {
     fixture.detectChanges();
-    const expectedRemovedCourse: Course = new BasicCourse(1, "Test course", new Date(2018, 1, 2), 67, "Description");
+    const expectedRemovedCourse: Course = new BasicCourse({
+      id: 1, name: "Test course", createionDate: new Date(2018, 1, 2),
+      duration: 67, description: "Description"
+    });
 
     const debugElement: DebugElement = fixture.debugElement;
     const deleteButton: DebugElement = debugElement.query(By.css('.delete-btn'));
