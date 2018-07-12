@@ -1,3 +1,4 @@
+import { CourseHighlightDirective } from './course-highlight.directive';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,13 +10,22 @@ import { DurationPipe } from 'app/courses/duration.pipe';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule
+    CommonModule,
+    FormsModule
   ],
-  declarations: [CoursesListComponent, CoursesToolbarComponent,
-    CourseItemComponent, DurationPipe, CoursesFilterPipe],
+  declarations: [
+    CoursesListComponent,
+    CoursesToolbarComponent,
+    CourseItemComponent,
+    DurationPipe,
+    CoursesFilterPipe,
+    CourseHighlightDirective
+  ],
   exports: [
-    CoursesListComponent, DurationPipe, CoursesFilterPipe
+    CoursesListComponent
   ],
-  providers: [CoursesFilterPipe]
+  providers: [
+    CoursesFilterPipe
+  ]
 })
 export class CoursesModule { }
