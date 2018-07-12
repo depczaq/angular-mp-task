@@ -1,4 +1,4 @@
-import { CoursesSortPipe } from './courses-sort.pipe';
+import { CoursesSortPipe } from 'app/courses/courses-sort.pipe';
 
 describe('CourseSortPipe', () => {
   it('create an instance', () => {

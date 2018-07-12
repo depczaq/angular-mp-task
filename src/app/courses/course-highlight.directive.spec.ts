@@ -1,4 +1,4 @@
-import { CourseHighlightDirective } from './course-highlight.directive';
+import { CourseHighlightDirective } from 'app/courses/course-highlight.directive';
 
 describe('CourseHighlightDirective', () => {
   it('should create an instance', () => {

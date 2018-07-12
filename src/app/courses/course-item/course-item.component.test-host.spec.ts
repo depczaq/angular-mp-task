@@ -7,35 +7,35 @@ import { Course } from 'app/courses/course.model';
 
 @Component({
   template:
-    `<app-course-item 
+    `<app-course-item
       [courseItem]="courseItem"
       (courseDeleted)="removeCourse($event)">
     </app-course-item>`
 })
-export class TestCourseItemComponentHost {
+export class TestCourseItemHostComponent {
   public course: Course = new BasicCourse({
     id: 1, name: "Test course", createionDate: new Date(2018, 1, 2),
     duration: 67, description: "Description"
   });
   public deletedCourse: Course;
-  constructor() { };
-  public removeCourse(course: Course) { this.deletedCourse = course };
+  constructor() { }
+  public removeCourse(course: Course) { this.deletedCourse = course; }
 }
 
 describe('CourseItemComponent', () => {
-  let testHost: TestCourseItemComponentHost;
-  let fixture: ComponentFixture<TestCourseItemComponentHost>;
+  let testHost: TestCourseItemHostComponent;
+  let fixture: ComponentFixture<TestCourseItemHostComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, TestCourseItemComponentHost]
+      declarations: [CourseItemComponent, TestCourseItemHostComponent]
     });
-  })
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestCourseItemComponentHost);
+    fixture = TestBed.createComponent(TestCourseItemHostComponent);
     testHost = fixture.componentInstance;
-  })
+  });
 
   it('delete button should invoke removeCourse method', () => {
     const nativeElement: HTMLElement = fixture.nativeElement;

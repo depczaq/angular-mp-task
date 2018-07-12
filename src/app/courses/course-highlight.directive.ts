@@ -11,14 +11,14 @@ export class CourseHighlightDirective implements OnInit {
   private readonly FRESH_COURSE_CLASS: string = 'new-course-item';
   private readonly UPCOMING_COURSE_CLASS: string = 'upcoming-course-item';
 
-  @Input('appCourseHighlight') creationDate: Date;
+  @Input() creationDate: Date;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    let courseAge = this.calculateAge(this.creationDate);
+    const courseAge = this.calculateAge(this.creationDate);
     if (this.isFreshCourse(courseAge)) {
-      this.addClass(this.FRESH_COURSE_CLASS)
+      this.addClass(this.FRESH_COURSE_CLASS);
     } else if (this.isUpcomingCourse(courseAge)) {
       this.addClass(this.UPCOMING_COURSE_CLASS);
     }
