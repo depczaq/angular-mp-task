@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, DoCheck, OnDestroy, SimpleChanges } from '@angular/core';
-import { Course } from '../course';
+import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 
 @Component({
@@ -31,8 +31,8 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
     console.log("LIFECYCLE ngOnDestroy");
   }
 
-  public removeFromList(event) {
-    console.log(event);
+  public removeFromList(course: Course) {
+    console.log(course.id);
   }
 
   public loadMore() {
