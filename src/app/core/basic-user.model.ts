@@ -1,13 +1,11 @@
-import { User } from "./user.model";
+import { User } from 'app/core/user.model';
 
 export class BasicUser implements User {
     id: number;
     firstName: string;
     lastName: string;
 
-    constructor(id: number, firstName: string, lastName: string) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    constructor(properties: any) {
+        Object.assign(this, properties);
     }
 }

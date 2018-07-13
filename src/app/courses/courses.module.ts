@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CoursesListComponent } from './courses-list/courses-list.component';
-import { CoursesToolbarComponent } from './courses-toolbar/courses-toolbar.component';
-import { CourseItemComponent } from './course-item/course-item.component';
+import { CourseItemComponent } from 'app/courses/course-item/course-item.component';
+import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
+import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-toolbar.component';
 
 @NgModule({
   imports: [

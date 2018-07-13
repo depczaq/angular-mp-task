@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { FooterComponent } from './footer/footer.component';
+import { NgModule } from '@angular/core';
+import { BreadcrumbsComponent } from 'app/core/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from 'app/core/footer/footer.component';
+import { HeaderComponent } from 'app/core/header/header.component';
 
 @NgModule({
   imports: [
