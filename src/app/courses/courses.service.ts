@@ -9,6 +9,7 @@ export class CoursesService {
   constructor() { }
 
   public getCoursesList(): Course[] {
+
     const c1: Course = new BasicCourse({
       id: 1,
       title: "Video course 1",

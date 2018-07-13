@@ -1,4 +1,4 @@
-import { User } from 'app/core/user';
+import { User } from 'app/core/user.model';
 
 export class BasicUser implements User {
     id: number;

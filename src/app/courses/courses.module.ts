@@ -9,7 +9,6 @@ import { CoursesSortPipe } from 'app/courses/courses-sort.pipe';
 import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-toolbar.component';
 import { DurationPipe } from 'app/courses/duration.pipe';
 
-
 @NgModule({
   imports: [
     CommonModule,
