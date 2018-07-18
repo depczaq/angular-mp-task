@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
 
 @Component({
   selector: 'app-courses-toolbar',
@@ -7,15 +8,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CoursesToolbarComponent implements OnInit {
 
-  @Output('searchExecuted') searchExecutedEventEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public searchExecute = new EventEmitter<CoursesSearchEvent>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public runSearch(text: string) {
+  public searchClicked(text: string) {
     console.log('Search for: ' + text);
-    this.searchExecutedEventEmitter.emit(text);
+    this.searchExecute.emit({ searchText: text });
   }
 }

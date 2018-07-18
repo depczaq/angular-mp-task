@@ -6,7 +6,7 @@ export class BasicCourse implements Course {
     creationDate: Date;
     duration: number;
     description: string;
-    topRated: boolean = false;
+    topRated: boolean;
 
     constructor(properties: any) {
         Object.assign(this, properties);

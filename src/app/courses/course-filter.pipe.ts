@@ -7,10 +7,9 @@ import { Course } from 'app/courses/course.model';
 export class CoursesFilterPipe implements PipeTransform {
 
   transform(courses: Course[], searchQuery: string) {
-    return courses.filter(course =>
+    return courses.filter(course => (
       course.title.includes(searchQuery)
       || course.description.includes(searchQuery)
-    );
-
+    ));
   }
 }

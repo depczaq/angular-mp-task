@@ -6,10 +6,9 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 export class CourseHighlightDirective implements OnInit {
 
   // TWO_WEEKS = 1000 millisecons * 60 seconds * 60 minutes * 24 hours * 14 days
-  private readonly TWO_WEEKS: number = 1000 * 60 * 60 * 24 * 14;
-
-  private readonly FRESH_COURSE_CLASS: string = 'new-course-item';
-  private readonly UPCOMING_COURSE_CLASS: string = 'upcoming-course-item';
+  private static readonly twoWeeks: number = 1000 * 60 * 60 * 24 * 14;
+  private static readonly freshCourseClass = 'new-course-item';
+  private static readonly upcomingCourseClass = 'upcoming-course-item';
 
   @Input() creationDate: Date;
 
@@ -18,11 +17,10 @@ export class CourseHighlightDirective implements OnInit {
   ngOnInit(): void {
     const courseAge = this.calculateAge(this.creationDate);
     if (this.isFreshCourse(courseAge)) {
-      this.addClass(this.FRESH_COURSE_CLASS);
+      this.addClass(CourseHighlightDirective.freshCourseClass);
     } else if (this.isUpcomingCourse(courseAge)) {
-      this.addClass(this.UPCOMING_COURSE_CLASS);
+      this.addClass(CourseHighlightDirective.upcomingCourseClass);
     }
-
   }
 
   private calculateAge(date: Date) {
@@ -34,7 +32,7 @@ export class CourseHighlightDirective implements OnInit {
   }
 
   private isFreshCourse(courseAge: number) {
-    return courseAge >= 0 && courseAge <= this.TWO_WEEKS;
+    return courseAge >= 0 && courseAge <= CourseHighlightDirective.twoWeeks;
   }
 
   private addClass(clazz: string) {

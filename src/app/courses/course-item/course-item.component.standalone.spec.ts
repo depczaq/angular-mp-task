@@ -44,5 +44,5 @@ describe('CourseItemComponent', () => {
     deleteButton.triggerEventHandler('click', null);
 
     expect(deletedCourse).toBe(course);
-  })
+  });
 });

@@ -5,9 +5,9 @@ import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { CourseHighlightDirective } from 'app/courses/course-highlight.directive';
 import { CourseItemComponent } from 'app/courses/course-item/course-item.component';
 import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
-import { CoursesSortPipe } from 'app/courses/courses-sort.pipe';
+import { CoursesSortByTimePipe } from 'app/courses/courses-sort-by-time.pipe';
 import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-toolbar.component';
-import { DurationPipe } from 'app/courses/duration.pipe';
+import { CourseDurationPipe } from 'app/courses/course-duration.pipe';
 
 @NgModule({
   imports: [
@@ -18,10 +18,10 @@ import { DurationPipe } from 'app/courses/duration.pipe';
     CoursesListComponent,
     CoursesToolbarComponent,
     CourseItemComponent,
-    DurationPipe,
+    CourseDurationPipe,
     CoursesFilterPipe,
     CourseHighlightDirective,
-    CoursesSortPipe
+    CoursesSortByTimePipe
   ],
   exports: [
     CoursesListComponent

@@ -2,6 +2,7 @@ import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from 
 import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { Course } from 'app/courses/course.model';
 import { CoursesService } from 'app/courses/courses.service';
+import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
 
 @Component({
   selector: 'app-courses-list',
@@ -19,7 +20,7 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("LIFECYCLE ngOnChanges: " + changes.previousValue + "->" + changes.currentValue);
+    console.log("LIFECYCLE ngOnChanges");
   }
 
   ngOnInit() {
@@ -44,9 +45,9 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
     console.log("Load more");
   }
 
-  public filterResults(searchQuery: string) {
-    if (searchQuery) {
-      this.coursesList = this.searchFilterPipe.transform(this.allCoursesList, searchQuery);
+  public filterResults(searchEvent: CoursesSearchEvent) {
+    if (searchEvent.searchText) {
+      this.coursesList = this.searchFilterPipe.transform(this.allCoursesList, searchEvent.searchText);
     } else {
       this.coursesList = this.allCoursesList;
     }
