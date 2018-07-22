@@ -1,8 +1,8 @@
 import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { Course } from 'app/courses/course.model';
-import { CoursesService } from 'app/courses/courses.service';
 import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
+import { CoursesService } from 'app/courses/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -10,12 +10,10 @@ import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
-  public allCoursesList: Course[];
   public coursesList: Course[];
 
   constructor(private coursesService: CoursesService,
     private searchFilterPipe: CoursesFilterPipe) {
-    this.allCoursesList = [];
     this.coursesList = [];
   }
 
@@ -25,8 +23,7 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   ngOnInit() {
     console.log("LIFECYCLE ngOnInit");
-    this.allCoursesList = this.coursesService.getCoursesList();
-    this.coursesList = this.allCoursesList;
+    this.coursesList = this.coursesService.getList();
   }
 
   ngDoCheck(): void {
@@ -47,9 +44,9 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   public filterResults(searchEvent: CoursesSearchEvent) {
     if (searchEvent.searchText) {
-      this.coursesList = this.searchFilterPipe.transform(this.allCoursesList, searchEvent.searchText);
+      this.coursesList = this.searchFilterPipe.transform(this.coursesService.getList(), searchEvent.searchText);
     } else {
-      this.coursesList = this.allCoursesList;
+      this.coursesList = this.coursesService.getList();
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Course } from 'app/courses/course.model';
 
 export class BasicCourse implements Course {
-    id: number;
+    readonly id: number;
     title: string;
     creationDate: Date;
     duration: number;
