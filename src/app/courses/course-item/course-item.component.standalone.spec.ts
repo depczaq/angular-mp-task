@@ -22,7 +22,10 @@ describe('CourseItemComponent', () => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
 
-    course = { id: 1, title: "Test course", duration: 32, creationDate: new Date(2018, 1, 2), description: "Description" };
+    course = {
+      id: 1, title: "Test course", duration: 32, creationDate: new Date(2018, 1, 2),
+      description: "Description", topRated: false
+    };
     component.courseItem = course;
   });
 
@@ -41,5 +44,5 @@ describe('CourseItemComponent', () => {
     deleteButton.triggerEventHandler('click', null);
 
     expect(deletedCourse).toBe(course);
-  })
+  });
 });

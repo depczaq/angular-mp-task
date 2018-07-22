@@ -5,3 +5,11 @@
 2. How to test lifecycle hook methods (i.e. in the CoursesListComponent)?
 
 3. How to debug unit test (and not only unit tests)?
+
+4. What's the advantage of using Object.assign(..) in the constructor?
+
+  constructor(properties: any) {
+    Object.assign(this, properties); // Copies all values from properties to this
+  }
+
+
