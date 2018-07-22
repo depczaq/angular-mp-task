@@ -5,7 +5,7 @@ import { CoursesService } from 'app/courses/courses.service';
 const existingCourseId = 1;
 const notExistingCourseId = 99999;
 
-fdescribe('CoursesService', () => {
+describe('CoursesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [CoursesService]
