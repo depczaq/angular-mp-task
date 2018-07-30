@@ -13,14 +13,8 @@ export class CoursesService {
   constructor() { }
 
   public create(title: string, duration: number, creationDate: Date, description: string, topRated: boolean) {
-    const newCourse = new BasicCourse({
-      id: this.generateId(),
-      title: title,
-      duration: duration,
-      creationDate: creationDate,
-      description: description,
-      topRated: topRated
-    });
+    const id = this.generateId();
+    const newCourse = new BasicCourse({ id, title, duration, creationDate, description, topRated });
     this.internalList().push(newCourse);
   }
 

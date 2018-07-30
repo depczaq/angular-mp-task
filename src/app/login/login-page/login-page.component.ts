@@ -38,7 +38,7 @@ export class LoginPageComponent {
     this.invalidPassword = !this.isNotEmpty(password);
   }
 
-  private isNotEmpty(text: string) {
+  private isNotEmpty(text: string): boolean {
     return text && text.length > 0;
   }
 }
