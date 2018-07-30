@@ -1,4 +1,3 @@
-import { CourseDeleteEvent } from '../course-delete-event';
 import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { Course } from 'app/courses/course.model';
@@ -36,9 +35,15 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
     console.log("LIFECYCLE ngOnDestroy");
   }
 
-  public removeCourse(event: CourseDeleteEvent) {
-    this.coursesService.remove(event.courseId);
-    this.reloadList();
+  public removeCourse(course: Course) {
+    if (this.removeConfirmation(course)) {
+      this.coursesService.remove(course.id);
+      this.reloadList();
+    }
+  }
+
+  private removeConfirmation(course: Course): boolean {
+    return confirm(`Are you sure you want to delete the course \'${course.title}\'`);
   }
 
   public loadMore() {
