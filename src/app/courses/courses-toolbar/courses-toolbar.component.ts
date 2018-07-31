@@ -10,6 +10,8 @@ export class CoursesToolbarComponent implements OnInit {
 
   @Output() public searchExecute = new EventEmitter<CoursesSearchEvent>();
 
+  public searchText: string;
+
   constructor() { }
 
   ngOnInit() {
