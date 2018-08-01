@@ -1,12 +1,17 @@
-<app-courses-toolbar (searchExecute)="filterResults($event)"></app-courses-toolbar>
-<div class="courses-list">
-  <app-course-item *ngFor="let item of coursesList | orderBy" [courseItem]="item" (deleteCourse)="removeCourse($event)"></app-course-item>
-  <div *ngIf="coursesList.length == 0" class="card no-search-results">
-    <div class="card-body">
-      <p>No video courses found.</p>
+<div *ngIf="!editedCourse">
+  <app-courses-toolbar (searchExecute)="filterResults($event)"></app-courses-toolbar>
+  <div class="courses-list">
+    <app-course-item *ngFor="let item of coursesList | orderBy" [courseItem]="item" (deleteCourse)="removeCourse($event)" (editCourse)="editCourse($event)"></app-course-item>
+    <div *ngIf="coursesList.length == 0" class="card no-search-results">
+      <div class="card-body">
+        <p>No video courses found.</p>
+      </div>
+    </div>
+    <div *ngIf="coursesList.length > 0" class="card load-more">
+      <button type="button" (click)="loadMore()" class="btn btn-link">Load more</button>
     </div>
   </div>
-  <div *ngIf="coursesList.length > 0" class="card load-more">
-    <button type="button" (click)="loadMore()" class="btn btn-link">Load more</button>
-  </div>
+</div>
+<div>
+  <app-course-edit *ngIf="editedCourse" [editedCourse]="editedCourse" (courseSave)="courseSaved($event)"></app-course-edit>
 </div>

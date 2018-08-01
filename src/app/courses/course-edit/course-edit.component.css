@@ -1,0 +1,28 @@
+.course-edit {
+    margin: 25px;
+}
+
+.date-input {
+    width: 50%;
+}
+
+.duration-input {
+    width: 50%;
+    padding-right: 0px;
+    margin-right: -10px;
+}
+
+.duration-output {
+    position: relative;
+    left: 10px;
+}
+
+.buttons button {
+    margin-top: 25px; 
+}
+
+.buttons button {
+    margin-right: 50px;
+    width: 100px; 
+}
+
