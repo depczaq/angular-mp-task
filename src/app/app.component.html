@@ -1,6 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <app-header></app-header>
-<app-breadcrumbs></app-breadcrumbs>
-<app-courses-list></app-courses-list>
+<app-login-page *ngIf="!loggedIn"></app-login-page>
+<app-breadcrumbs *ngIf="loggedIn"></app-breadcrumbs>
+<app-courses-list *ngIf="loggedIn"></app-courses-list>
 <app-footer></app-footer>
 

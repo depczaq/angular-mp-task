@@ -1,6 +1,6 @@
 <app-courses-toolbar (searchExecute)="filterResults($event)"></app-courses-toolbar>
 <div class="courses-list">
-  <app-course-item *ngFor="let item of coursesList | orderBy" [courseItem]="item" (courseDeleted)="removeFromList($event)"></app-course-item>
+  <app-course-item *ngFor="let item of coursesList | orderBy" [courseItem]="item" (deleteCourse)="removeCourse($event)"></app-course-item>
   <div *ngIf="coursesList.length == 0" class="card no-search-results">
     <div class="card-body">
       <p>No video courses found.</p>

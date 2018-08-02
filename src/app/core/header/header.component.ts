@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from 'app/core/user-service.service';
-import { User } from 'app/core/user.model';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { AuthenticationService } from 'app/core/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  private loggedUser: User;
-
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthenticationService) {
   }
 
-  ngOnInit() {
-    this.loggedUser = this.userService.getLoggedUser();
+  private get loggedUser(): string {
+    return this.authService.getUserInfo();
+  }
+
+  private logOffClicked() {
+    console.log("Logging out.");
+    this.authService.logOut();
   }
 }

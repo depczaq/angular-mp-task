@@ -40,7 +40,7 @@ describe('CourseItemComponent', () => {
     expect(deleteButton).toBeTruthy();
 
     let deletedCourse: Course;
-    component.courseDeleted.subscribe((selected: Course) => deletedCourse = selected);
+    component.deleteCourse.subscribe((selected: Course) => deletedCourse = selected);
     deleteButton.triggerEventHandler('click', null);
 
     expect(deletedCourse).toBe(course);
