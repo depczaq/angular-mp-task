@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { Course } from 'app/courses/course.model';
 import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
@@ -50,6 +50,11 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   public editCourse(course: Course): void {
     this.editedCourse = course;
+  }
+
+  public courseSaved(course: Course): void {
+    this.editedCourse = null;
+    console.log(course.title);
   }
 
   public loadMore(): void {

@@ -7,13 +7,13 @@ import { Course } from 'app/courses/course.model';
   styleUrls: ['./course-edit.component.css']
 })
 export class CourseEditComponent {
-
   @Input() editedCourse: Course;
+  @Output() saveCourse: EventEmitter<Course> = new EventEmitter<Course>();
 
   constructor() { }
 
   public saveClicked(): void {
-    console.log(`Saved course: ${this.editedCourse.title}`);
+    this.saveCourse.emit(this.editedCourse);
   }
 
   public cancelClicked(): void {
