@@ -23,7 +23,6 @@ export class LoginPageComponent {
 
     if (!this.invalidUsername && !this.invalidPassword) {
       const md5password = Md5.hashStr(this.password).toString();
-      console.log(md5password);
       this.authService.logIn(this.username, md5password);
       console.log("Logged in successfully.");
     }
