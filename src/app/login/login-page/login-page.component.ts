@@ -9,12 +9,11 @@ import { Md5 } from 'ts-md5/dist/md5';
 })
 export class LoginPageComponent {
 
-  private invalidUsername = false;
-  private invalidPassword = false;
+  public invalidUsername = false;
+  public invalidPassword = false;
 
-  private username: string;
-  private password: string;
-
+  public username: string;
+  public password: string;
 
   constructor(private authService: AuthenticationService) { }
 

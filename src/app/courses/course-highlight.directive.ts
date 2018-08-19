@@ -10,7 +10,7 @@ export class CourseHighlightDirective implements OnInit {
   private static readonly freshCourseClass = 'new-course-item';
   private static readonly upcomingCourseClass = 'upcoming-course-item';
 
-  @Input() creationDate: Date;
+  @Input() public creationDate: Date;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
 

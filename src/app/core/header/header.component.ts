@@ -11,7 +11,7 @@ export class HeaderComponent {
   constructor(private authService: AuthenticationService) {
   }
 
-  private get loggedUser(): string {
+  public get loggedUser(): string {
     return this.authService.getUserInfo();
   }
 

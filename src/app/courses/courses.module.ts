@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CourseDurationPipe } from 'app/courses/course-duration.pipe';
+import { CourseEditComponent } from 'app/courses/course-edit/course-edit.component';
 import { CoursesFilterPipe } from 'app/courses/course-filter.pipe';
 import { CourseHighlightDirective } from 'app/courses/course-highlight.directive';
 import { CourseItemComponent } from 'app/courses/course-item/course-item.component';
@@ -21,7 +22,8 @@ import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-too
     CourseDurationPipe,
     CoursesFilterPipe,
     CourseHighlightDirective,
-    CoursesSortByTimePipe
+    CoursesSortByTimePipe,
+    CourseEditComponent
   ],
   exports: [
     CoursesListComponent
