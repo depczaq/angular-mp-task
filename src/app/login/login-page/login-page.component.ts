@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/core/authentication.service';
 import { Md5 } from 'ts-md5/dist/md5';
 
@@ -15,7 +16,7 @@ export class LoginPageComponent {
   public username: string;
   public password: string;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   public loginClicked() {
     this.validateUsername(this.username);
@@ -23,8 +24,12 @@ export class LoginPageComponent {
 
     if (!this.invalidUsername && !this.invalidPassword) {
       const md5password = Md5.hashStr(this.password).toString();
-      this.authService.logIn(this.username, md5password);
-      console.log("Logged in successfully.");
+
+      if (this.authService.logIn(this.username, md5password)) {
+        const targetUrl = this.authService.redirectUrl ? this.authService.redirectUrl : '';
+        this.router.navigate([targetUrl]);
+        console.log("Logged in successfully.");
+      }
     }
   }
 
