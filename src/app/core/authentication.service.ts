@@ -1,13 +1,13 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'app/core/user.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
 
+export const USER_TOKEN_KEY = 'userToken';
+
 const LOGIN_URL = 'http://localhost:3004/auth/login';
 const USER_INFO_URL = 'http://localhost:3004/auth/userinfo';
-const USER_TOKEN_KEY = 'userToken';
-
 
 @Injectable({
   providedIn: 'root'
@@ -36,16 +36,18 @@ export class AuthenticationService {
   }
 
   public getUserInfo(): Observable<User> {
-    const userToken = localStorage.getItem(USER_TOKEN_KEY);
-    const headers: HttpHeaders = new HttpHeaders({
-      'Authorization': userToken
-    });
+    const headers: HttpHeaders = this.createRequestHeaders();
 
     return this.httpClient.post<any>(USER_INFO_URL, {}, { headers })
       .pipe(
         retry(3),
         catchError(this.handleError)
       );
+  }
+
+  private createRequestHeaders(): HttpHeaders {
+    const userToken = localStorage.getItem(USER_TOKEN_KEY);
+    return new HttpHeaders({ 'Authorization': userToken });
   }
 
   private handleError(error: HttpErrorResponse) {

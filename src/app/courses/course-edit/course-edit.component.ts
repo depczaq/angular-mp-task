@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BasicCourse } from 'app/courses/basic-course.model';
 import { Course } from 'app/courses/course.model';
 import { CoursesService } from 'app/courses/courses.service';
 
@@ -16,13 +17,19 @@ export class CourseEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private coursesService: CoursesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.course = this.emptyCourse(); // displayed until real data will be loaded from service
+
     this.route.params.subscribe((params) => {
       const courseId: number = params['id'];
       if (courseId) {
-        this.course = this.coursesService.getById(+courseId);
+        this.coursesService.getById(+courseId)
+          .subscribe(
+            (course) => this.course = course,
+            (error) => console.log(error)
+          );
       } else {
         this.course = this.coursesService.create();
       }
@@ -31,19 +38,38 @@ export class CourseEditComponent implements OnInit {
 
   public saveClicked(): void {
     if (this.course.id) {
-      this.coursesService.update(this.course);
+      this.coursesService.update(this.course).subscribe(
+        (updatedCourse) => {
+          console.log("Updated course: " + updatedCourse);
+          this.navigateToList();
+        },
+        (error) => console.log(error)
+      );
     } else {
       this.coursesService.addNew(
         this.course.title,
         this.course.duration,
         this.course.creationDate,
         this.course.description,
-        this.course.topRated);
+        this.course.topRated).subscribe(
+          (addedCourse) => {
+            console.log("Added course: " + addedCourse);
+            this.navigateToList();
+          },
+          (error) => console.log(error)
+        );
     }
+  }
+
+  private navigateToList() {
     this.router.navigate(['/courses']);
   }
 
   public cancelClicked(): void {
     this.router.navigate(['/courses']);
+  }
+
+  private emptyCourse(): Course {
+    return new BasicCourse({});
   }
 }

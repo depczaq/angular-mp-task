@@ -13,11 +13,12 @@ import { CoursesService } from 'app/courses/courses.service';
 export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestroy {
   public coursesList: Course[];
 
-  private searchFilter = '';
+  private searchText = '';
+  private pageNo = 1;
 
   constructor(
     private coursesService: CoursesService,
-    private searchFilterPipe: CoursesFilterPipe,
+    // private searchFilterPipe: CoursesFilterPipe,
     private router: Router) {
 
     this.coursesList = [];
@@ -42,8 +43,11 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
 
   public removeCourse(course: Course): void {
     if (this.removeConfirmation(course)) {
-      this.coursesService.remove(course.id);
-      this.reloadList();
+      this.coursesService.remove(course.id)
+        .subscribe(
+          () => this.reloadList(),
+          (error) => console.log(error)
+        );
     }
   }
 
@@ -60,15 +64,21 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
   }
 
   public loadMore(): void {
-    console.log("Load more");
+    this.pageNo++;
+    this.reloadList();
+    console.log("Load page " + this.pageNo);
   }
 
   public filterResults(searchEvent: CoursesSearchEvent): void {
-    this.searchFilter = searchEvent.searchText;
+    this.searchText = searchEvent.searchText || '';
     this.reloadList();
   }
 
   private reloadList(): void {
-    this.coursesList = this.searchFilterPipe.transform(this.coursesService.getList(), this.searchFilter);
+    this.coursesService.getList(0, this.pageNo * 5, this.searchText)
+      .subscribe(
+        ((courses) => this.coursesList = courses),
+        (error) => console.log(error)
+      );
   }
 }
