@@ -32,9 +32,7 @@ export class CoursesService {
   public getById(courseId: number): Observable<Course> {
     return this.httpClient.get<ApiCourse>(COURSES_URL + "/" + courseId)
       .pipe(
-        tap((c) => console.log(c)),
         map((c) => this.convertFromApiFormat(c)),
-        tap((c) => console.log(c)),
         retry(3),
         catchError(this.handleError)
       );
