@@ -36,18 +36,11 @@ export class AuthenticationService {
   }
 
   public getUserInfo(): Observable<User> {
-    const headers: HttpHeaders = this.createRequestHeaders();
-
-    return this.httpClient.post<any>(USER_INFO_URL, {}, { headers })
+    return this.httpClient.post<any>(USER_INFO_URL, {})
       .pipe(
         retry(3),
         catchError(this.handleError)
       );
-  }
-
-  private createRequestHeaders(): HttpHeaders {
-    const userToken = localStorage.getItem(USER_TOKEN_KEY);
-    return new HttpHeaders({ 'Authorization': userToken });
   }
 
   private handleError(error: HttpErrorResponse) {

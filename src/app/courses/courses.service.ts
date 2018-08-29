@@ -39,7 +39,6 @@ export class CoursesService {
   }
 
   public getList(start: number, count: number, searchText): Observable<Course[]> {
-    // const headers: HttpHeaders = this.createRequestHeaders();
     const params = this.createRequestParams(start, count, searchText);
 
     return this.httpClient.get<ApiCourse[]>(COURSES_URL, { params })
@@ -106,11 +105,6 @@ export class CoursesService {
       isTopRated: c.topRated,
       authors: null
     });
-  }
-
-  private createRequestHeaders(): HttpHeaders {
-    const userToken = localStorage.getItem(USER_TOKEN_KEY);
-    return new HttpHeaders({ 'Authorization': userToken });
   }
 
   private createRequestParams(start: number, count: number, searchText: string) {
