@@ -1,8 +1,7 @@
 <nav class="navbar navbar-light bg-light">
   <div class="float-left">
     <div class="form-inline">
-      <input [(ngModel)]="searchText" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button (click)="searchClicked(searchText)" class="btn btn-primary btn-sm" type="submit">Search</button>
+      <input #searchInput (change)="searchInputChanged(searchInput.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </div>
   </div>
   <div class="float-right;">

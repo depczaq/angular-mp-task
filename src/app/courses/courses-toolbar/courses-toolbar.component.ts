@@ -1,26 +1,46 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses-toolbar',
   templateUrl: './courses-toolbar.component.html',
   styleUrls: ['./courses-toolbar.component.css']
 })
-export class CoursesToolbarComponent implements OnInit {
+export class CoursesToolbarComponent implements OnInit, OnDestroy {
 
   @Output() public searchExecute = new EventEmitter<CoursesSearchEvent>();
   @Output() public addNewExecute = new EventEmitter<any>();
 
-  public searchText: string;
+  private searchInputChange$: Subject<string>;
+  private searchInputChangeSubscription: Subscription;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.searchInputChange$ = new Subject();
+
+    this.searchInputChangeSubscription = this.searchInputChange$
+      .pipe(
+        filter((text) => !text || text.length > 2),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((text) => this.emitSearchEvent(text));
   }
 
-  public searchClicked(text: string): void {
-    console.log('Search for: ' + text);
-    this.searchExecute.emit({ searchText: text });
+  ngOnDestroy(): void {
+    this.searchInputChangeSubscription.unsubscribe();
+  }
+
+  public searchInputChanged(searchInputText: string): void {
+    this.searchInputChange$.next(searchInputText);
+  }
+
+  private emitSearchEvent(searchText: string) {
+    console.log('Search for: ' + searchText);
+    this.searchExecute.emit({ searchText });
   }
 
   public addNewClicked() {

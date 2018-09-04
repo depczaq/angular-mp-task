@@ -1,5 +1,4 @@
-<app-courses-toolbar (searchExecute)="filterResults($event)" (addNewExecute)="addNewCourse()">
-</app-courses-toolbar>
+<app-courses-toolbar (searchExecute)="filterResults($event)" (addNewExecute)="addNewCourse()"></app-courses-toolbar>
 <div class="courses-list">
   <app-course-item *ngFor="let item of coursesList | orderBy" [courseItem]="item" (deleteCourse)="removeCourse($event)" (editCourse)="editCourse($event)"></app-course-item>
   <div *ngIf="coursesList.length == 0" class="card no-search-results">
