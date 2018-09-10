@@ -1,4 +1,5 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/core/authentication.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthenticationService } from 'app/core/authentication.service';
 })
 export class HeaderComponent {
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router: Router) {
   }
 
   public get loggedUser(): string {
@@ -18,5 +19,6 @@ export class HeaderComponent {
   private logOffClicked() {
     console.log("Logging out.");
     this.authService.logOut();
+    this.router.navigate(['/login']);
   }
 }

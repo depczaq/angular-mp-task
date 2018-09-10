@@ -8,11 +8,14 @@ const passwordKey = 'password';
 })
 export class AuthenticationService {
 
+  public redirectUrl: string;
+
   constructor() { }
 
-  public logIn(username: string, password: string): void {
+  public logIn(username: string, password: string): boolean {
     localStorage.setItem(usernameKey, username);
     localStorage.setItem(passwordKey, password);
+    return this.isAutheticated();
   }
 
   public logOut(): void {

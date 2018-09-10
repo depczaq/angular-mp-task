@@ -9,6 +9,7 @@ import { CoursesSearchEvent } from 'app/courses/courses-search-event.model';
 export class CoursesToolbarComponent implements OnInit {
 
   @Output() public searchExecute = new EventEmitter<CoursesSearchEvent>();
+  @Output() public addNewExecute = new EventEmitter<any>();
 
   public searchText: string;
 
@@ -17,8 +18,12 @@ export class CoursesToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  public searchClicked(text: string) {
+  public searchClicked(text: string): void {
     console.log('Search for: ' + text);
     this.searchExecute.emit({ searchText: text });
+  }
+
+  public addNewClicked() {
+    this.addNewExecute.emit();
   }
 }
