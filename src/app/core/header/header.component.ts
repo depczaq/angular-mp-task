@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/core/authentication.service';
 
@@ -7,13 +7,17 @@ import { AuthenticationService } from 'app/core/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  public loggedUser = '';
 
   constructor(private authService: AuthenticationService, private router: Router) {
   }
 
-  public get loggedUser(): string {
-    return this.authService.getUserInfo();
+  ngOnInit(): void {
+    this.authService.getUserInfo().subscribe(
+      (response) => { this.loggedUser = response.name.first; },
+      (error) => { console.error(error), this.loggedUser = ''; }
+    );
   }
 
   private logOffClicked() {

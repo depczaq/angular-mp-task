@@ -1,8 +1,13 @@
+import { ApiCourse } from './api-course.model';
 import { BasicCourse } from './basic-course.model';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { USER_TOKEN_KEY } from 'app/core/authentication.service';
 import { Course } from 'app/courses/course.model';
-import { c1, c2, c3, c4, c5, c6, c7, c8 } from 'app/courses/courses-list';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 
+const COURSES_URL = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +15,40 @@ import { c1, c2, c3, c4, c5, c6, c7, c8 } from 'app/courses/courses-list';
 export class CoursesService {
   private coursesList: Course[];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  public addNew(title: string, duration: number, creationDate: Date, description: string, topRated: boolean) {
-    const id = this.generateId();
-    const newCourse = new BasicCourse({ id, title, duration, creationDate, description, topRated });
-    this.internalList().push(newCourse);
+  public addNew(title: string, duration: number, creationDate: Date, description: string, topRated: boolean): Observable<Course> {
+    const newCourse = new BasicCourse({ title, duration, creationDate, description, topRated });
+    const apiCourse = this.convertToApiFormat(newCourse);
+
+    return this.httpClient.post<ApiCourse>(COURSES_URL, apiCourse)
+      .pipe(
+        map((c) => this.convertFromApiFormat(c)),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
 
-  public getById(courseId: number): Course {
-    const course = this.getByIdInternal(courseId);
-    return course ? this.copy(course) : undefined;
+  public getById(courseId: number): Observable<Course> {
+    return this.httpClient.get<ApiCourse>(COURSES_URL + "/" + courseId)
+      .pipe(
+        map((c) => this.convertFromApiFormat(c)),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
 
-  public getList(): Course[] {
-    return Array.from(this.internalList(), c => this.copy(c));
+  public getList(start: number, count: number, searchText): Observable<Course[]> {
+    const params = this.createRequestParams(start, count, searchText);
+
+    return this.httpClient.get<ApiCourse[]>(COURSES_URL, { params })
+      .pipe(
+        map((c) => this.convertArrayFromApiFormat(c)),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
+
 
   public create(): Course {
     const course = new BasicCourse({
@@ -38,50 +61,73 @@ export class CoursesService {
     return course;
   }
 
-  public update(updatedCourse: Course): Course {
-    const course = this.getByIdInternal(updatedCourse.id);
-    if (course) {
-      Object.assign(course, updatedCourse);
-      return this.getById(updatedCourse.id);
+  public update(updatedCourse: Course): Observable<Course> {
+    const apiCourse = this.convertToApiFormat(updatedCourse);
+    return this.httpClient.put<ApiCourse>(COURSES_URL + "/" + updatedCourse.id, apiCourse)
+      .pipe(
+        map((c) => this.convertFromApiFormat(c)),
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
+
+  public remove(courseId: number): Observable<Course> {
+    return this.httpClient.delete<ApiCourse>(COURSES_URL + "/" + courseId)
+      .pipe(
+        map(this.convertFromApiFormat),
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
+
+  private convertArrayFromApiFormat(apiCourses: ApiCourse[]): Course[] {
+    return apiCourses.map(this.convertFromApiFormat);
+  }
+
+  private convertFromApiFormat(c: ApiCourse): Course {
+    return new BasicCourse({
+      id: c.id,
+      title: c.name,
+      creationDate: new Date(c.date),
+      duration: c.length,
+      description: c.description,
+      topRated: c.isTopRated
+    });
+  }
+
+  private convertToApiFormat(c: Course): ApiCourse {
+    return ({
+      id: c.id,
+      name: c.title,
+      date: c.creationDate.toString(),
+      length: c.duration,
+      description: c.description,
+      isTopRated: c.topRated,
+      authors: null
+    });
+  }
+
+  private createRequestParams(start: number, count: number, searchText: string) {
+    return {
+      start: start.toString(),
+      count: count.toString(),
+      textFragment: searchText
+    };
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
-    return undefined;
-  }
-
-  public remove(courseId: number): boolean {
-    const course = this.getByIdInternal(courseId);
-    if (course) {
-      const index = this.internalList().indexOf(course);
-      const removed = this.internalList().splice(index, 1);
-      return removed && removed.length > 0;
-    }
-    return false;
-  }
-
-  private generateId(): number {
-    const maxId = this.internalList()
-      .map(c => c.id)
-      .sort(Math.max)
-      .shift();
-    return maxId + 1;
-  }
-
-  private internalList(): Course[] {
-    if (!this.coursesList) {
-      this.initList();
-    }
-    return this.coursesList;
-  }
-
-  private initList(): void {
-    this.coursesList = [c1, c2, c3, c4, c5, c6, c7, c8];
-  }
-
-  private getByIdInternal(courseId: number): Course {
-    return this.internalList().find(c => c.id === courseId);
-  }
-
-  private copy(course: Course): Course {
-    const copy = Object.create(Object.getPrototypeOf(course));
-    return Object.assign(copy, course);
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }

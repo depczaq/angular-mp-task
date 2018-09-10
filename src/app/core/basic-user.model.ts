@@ -1,9 +1,12 @@
+import { UserName } from 'app/core/user.model';
 import { User } from 'app/core/user.model';
 
 export class BasicUser implements User {
     id: number;
-    firstName: string;
-    lastName: string;
+    fakeToken: string;
+    name: UserName;
+    login: string;
+    password: string;
 
     constructor(properties: any) {
         Object.assign(this, properties);
