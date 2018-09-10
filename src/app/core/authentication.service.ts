@@ -18,8 +18,8 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public logIn(username: string, password: string): Observable<boolean> {
-    return this.httpClient.post<any>(LOGIN_URL, { login: username, password })
+  public logIn(login: string, password: string): Observable<boolean> {
+    return this.httpClient.post<any>(LOGIN_URL, { login, password })
       .pipe(
         tap((response) => localStorage.setItem(USER_TOKEN_KEY, response.token)),
         mapTo(true),

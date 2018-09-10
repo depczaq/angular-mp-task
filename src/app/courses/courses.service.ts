@@ -84,25 +84,25 @@ export class CoursesService {
     return apiCourses.map(this.convertFromApiFormat);
   }
 
-  private convertFromApiFormat(c: ApiCourse): Course {
+  private convertFromApiFormat({id, name: title, date, length: duration, description, isTopRated: topRated }: ApiCourse): Course {
     return new BasicCourse({
-      id: c.id,
-      title: c.name,
-      creationDate: new Date(c.date),
-      duration: c.length,
-      description: c.description,
-      topRated: c.isTopRated
+      id,
+      title,
+      creationDate: new Date(date),
+      duration ,
+      description,
+      topRated
     });
   }
 
-  private convertToApiFormat(c: Course): ApiCourse {
+  private convertToApiFormat({ id, title: name, creationDate, duration: length, description, topRated: isTopRated }: Course): ApiCourse {
     return ({
-      id: c.id,
-      name: c.title,
-      date: c.creationDate.toString(),
-      length: c.duration,
-      description: c.description,
-      isTopRated: c.topRated,
+      id,
+      name,
+      date: creationDate.toString(),
+      length,
+      description,
+      isTopRated,
       authors: null
     });
   }
