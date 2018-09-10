@@ -1,24 +1,24 @@
 <div class="course-edit">
   <div class="form-group">
     <label for="titleInput">Title:</label>
-    <input type="text" [(ngModel)]="editedCourse.title" class="form-control" id="titleInput">
+    <input type="text" [(ngModel)]="course.title" class="form-control" id="titleInput">
   </div>
   <div class="form-group">
     <label for="descriptionTextarea">Description:</label>
-    <textarea class="form-control" [(ngModel)]="editedCourse.description" id="descriptionTextarea" rows="5"></textarea>
+    <textarea class="form-control" [(ngModel)]="course.description" id="descriptionTextarea" rows="5"></textarea>
   </div>
   <div class="form-group date-input">
     <label for="creationDateInput">Date:</label>
-    <input type="text" [(ngModel)]="editedCourse.creationDate" class="form-control" id="creationDateInput" maxlength="10" placeholder="dd.MM.yyyy">
+    <input type="text" [(ngModel)]="course.creationDate" class="form-control" id="creationDateInput" maxlength="10" placeholder="dd.MM.yyyy">
   </div>
   <div class="form-group ">
     <label for="durationInput">Duration:</label>
     <div class="row">
       <div class="col duration-input">
-        <input type="text" [(ngModel)]="editedCourse.duration" class="form-control" id="durationInput">
+        <input type="text" [(ngModel)]="course.duration" class="form-control" id="durationInput">
       </div>
       <div class="col duration-output">
-        <span>{{editedCourse.duration | duration}}</span>
+        <span>{{course.duration | duration}}</span>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@ export class CoursesService {
 
   constructor() { }
 
-  public create(title: string, duration: number, creationDate: Date, description: string, topRated: boolean) {
+  public addNew(title: string, duration: number, creationDate: Date, description: string, topRated: boolean) {
     const id = this.generateId();
     const newCourse = new BasicCourse({ id, title, duration, creationDate, description, topRated });
     this.internalList().push(newCourse);
@@ -25,6 +25,17 @@ export class CoursesService {
 
   public getList(): Course[] {
     return Array.from(this.internalList(), c => this.copy(c));
+  }
+
+  public create(): Course {
+    const course = new BasicCourse({
+      title: "",
+      creationDate: new Date(Date.now()),
+      duration: 0,
+      description: "",
+      topRated: false
+    });
+    return course;
   }
 
   public update(updatedCourse: Course): Course {

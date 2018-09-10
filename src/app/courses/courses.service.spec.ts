@@ -58,14 +58,14 @@ describe('CoursesService', () => {
 
   });
 
-  describe('function create', () => {
+  describe('function addNew', () => {
 
     it('should add new element', inject([CoursesService], (service: CoursesService) => {
       expect(service).toBeTruthy();
 
       const coursesListLength = service.getList().length;
 
-      service.create('new course', 10, new Date(2018, 6, 10), 'description', false);
+      service.addNew('new course', 10, new Date(2018, 6, 10), 'description', false);
 
       const coursesList = service.getList();
       expect(coursesList.length).toBe(coursesListLength + 1);
@@ -77,7 +77,7 @@ describe('CoursesService', () => {
       const coursesListLength = service.getList().length;
 
       const newCourseTitle = 'new course';
-      service.create(newCourseTitle, 10, new Date(2018, 6, 10), 'description', false);
+      service.addNew(newCourseTitle, 10, new Date(2018, 6, 10), 'description', false);
       const newCourse = service.getList().pop();
 
       expect(newCourse.id).toBe(coursesListLength + 1);
