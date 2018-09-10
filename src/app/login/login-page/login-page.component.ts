@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/core/authentication.service';
-import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-login-page',
@@ -12,6 +11,7 @@ export class LoginPageComponent {
 
   public invalidUsername = false;
   public invalidPassword = false;
+  public accessDenied = false;
 
   public username: string;
   public password: string;
@@ -23,14 +23,20 @@ export class LoginPageComponent {
     this.validatePassword(this.password);
 
     if (!this.invalidUsername && !this.invalidPassword) {
-      const md5password = Md5.hashStr(this.password).toString();
-
-      if (this.authService.logIn(this.username, md5password)) {
-        const targetUrl = this.authService.redirectUrl ? this.authService.redirectUrl : '';
-        this.router.navigate([targetUrl]);
-        console.log("Logged in successfully.");
-      }
+      this.authService.logIn(this.username, this.password)
+        .subscribe(() => this.loginSuccesful(), () => this.loginError());
     }
+  }
+
+  private loginSuccesful(): void {
+    this.accessDenied = false;
+    const targetUrl = this.authService.redirectUrl ? this.authService.redirectUrl : '';
+    this.router.navigate([targetUrl]);
+    console.log("Logged in successfully.");
+  }
+  private loginError(): void {
+    this.accessDenied = true;
+    console.log("Access denied.");
   }
 
   private validateUsername(username: string): void {
