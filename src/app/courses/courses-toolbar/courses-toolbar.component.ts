@@ -11,7 +11,6 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 export class CoursesToolbarComponent implements OnInit, OnDestroy {
 
   @Output() public searchExecute = new EventEmitter<CoursesSearchEvent>();
-  @Output() public addNewExecute = new EventEmitter<any>();
 
   private searchInputChange$: Subject<string>;
   private searchInputChangeSubscription: Subscription;
@@ -41,9 +40,5 @@ export class CoursesToolbarComponent implements OnInit, OnDestroy {
   private emitSearchEvent(searchText: string) {
     console.log('Search for: ' + searchText);
     this.searchExecute.emit({ searchText });
-  }
-
-  public addNewClicked() {
-    this.addNewExecute.emit();
   }
 }

@@ -9,11 +9,13 @@ import { CourseItemComponent } from 'app/courses/course-item/course-item.compone
 import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
 import { CoursesSortByTimePipe } from 'app/courses/courses-sort-by-time.pipe';
 import { CoursesToolbarComponent } from 'app/courses/courses-toolbar/courses-toolbar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     CoursesListComponent,
