@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from 'app/core/page-not-found/page-not-found.co
 import { CourseEditComponent } from 'app/courses/course-edit/course-edit.component';
 import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
 import { LoginPageComponent } from 'app/login/login-page/login-page.component';
+import { CourseResolver } from './courses/course-resolver.service';
 
 export const ROUTES: Routes = [
     // default route
@@ -25,14 +26,20 @@ export const ROUTES: Routes = [
     {
         path: 'courses/new',
         component: CourseEditComponent,
-        canActivate: [AuthenticationGuard]
+        canActivate: [AuthenticationGuard],
+        resolve: {
+            course: CourseResolver
+        }
     },
 
     // edit course
     {
         path: 'courses/:id',
         component: CourseEditComponent,
-        canActivate: [AuthenticationGuard]
+        canActivate: [AuthenticationGuard],
+        resolve: {
+            course: CourseResolver
+        }
     },
 
     // login page

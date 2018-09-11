@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'app/core/authentication.service';
 
@@ -7,17 +7,23 @@ import { AuthenticationService } from 'app/core/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnChanges {
+  @Input() public loggedIn: boolean;
+
   public loggedUser = '';
 
   constructor(private authService: AuthenticationService, private router: Router) {
   }
 
-  ngOnInit(): void {
-    this.authService.getUserInfo().subscribe(
-      (response) => { this.loggedUser = response.name.first; },
-      (error) => { console.error(error), this.loggedUser = ''; }
-    );
+  ngOnChanges(): void {
+    if (this.loggedIn) {
+      this.authService.getUserInfo().subscribe(
+        (response) => { this.loggedUser = response.name.first; },
+        (error) => { console.error(error), this.loggedUser = ''; }
+      );
+    } else {
+      this.loggedUser = '';
+    }
   }
 
   private logOffClicked() {

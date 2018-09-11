@@ -55,10 +55,6 @@ export class CoursesListComponent implements OnChanges, OnInit, DoCheck, OnDestr
     return confirm(`Are you sure you want to delete the course \'${course.title}\'`);
   }
 
-  public addNewCourse(): void {
-    this.router.navigate(['/courses/new']);
-  }
-
   public editCourse(course: Course): void {
     this.router.navigate(['/courses', course.id]);
   }

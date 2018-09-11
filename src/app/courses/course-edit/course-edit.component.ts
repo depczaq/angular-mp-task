@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BasicCourse } from 'app/courses/basic-course.model';
 import { Course } from 'app/courses/course.model';
 import { CoursesService } from 'app/courses/courses.service';
 
@@ -17,23 +16,16 @@ export class CourseEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private coursesService: CoursesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.course = this.emptyCourse(); // displayed until real data will be loaded from service
-
-    this.route.params.subscribe((params) => {
-      const courseId: number = params['id'];
-      if (courseId) {
-        this.coursesService.getById(+courseId)
-          .subscribe(
-            (course) => this.course = course,
-            (error) => console.log(error)
-          );
-      } else {
-        this.course = this.coursesService.create();
-      }
-    });
+    this.route.data.subscribe(
+      (data: { course: Course }) => {
+        this.course = data.course;
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 
   public saveClicked(): void {
@@ -67,9 +59,5 @@ export class CourseEditComponent implements OnInit {
 
   public cancelClicked(): void {
     this.router.navigate(['/courses']);
-  }
-
-  private emptyCourse(): Course {
-    return new BasicCourse({});
   }
 }

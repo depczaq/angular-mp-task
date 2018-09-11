@@ -1,11 +1,10 @@
 <nav class="navbar navbar-light bg-light">
   <div class="float-left">
     <div class="form-inline">
-      <input [(ngModel)]="searchText" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button (click)="searchClicked(searchText)" class="btn btn-primary btn-sm" type="submit">Search</button>
+      <input #searchInput (change)="searchInputChanged(searchInput.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </div>
   </div>
   <div class="float-right;">
-    <button (click)="addNewClicked()" class="btn btn-primary btn-sm" type="submit">Add new</button>
+    <a routerLink="/courses/new" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Add new</a>
   </div>
 </nav>

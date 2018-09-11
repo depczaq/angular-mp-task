@@ -1,6 +1,6 @@
-<app-header></app-header>
+<app-header [loggedIn]="loggedIn"></app-header>
 <app-breadcrumbs *ngIf="loggedIn"></app-breadcrumbs>
-<!-- <app-courses-list *ngIf="loggedIn"></app-courses-list> -->
-<router-outlet></router-outlet>
-<app-footer></app-footer>
 
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

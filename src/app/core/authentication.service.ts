@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { User } from 'app/core/user.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, map, mapTo, retry, tap } from 'rxjs/operators';
 
 export const USER_TOKEN_KEY = 'userToken';
 
@@ -18,11 +18,11 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public logIn(username: string, password: string): Observable<boolean> {
-    return this.httpClient.post<any>(LOGIN_URL, { login: username, password })
+  public logIn(login: string, password: string): Observable<boolean> {
+    return this.httpClient.post<any>(LOGIN_URL, { login, password })
       .pipe(
         tap((response) => localStorage.setItem(USER_TOKEN_KEY, response.token)),
-        map(this.isAutheticated),
+        mapTo(true),
         catchError(this.handleError)
       );
   }
