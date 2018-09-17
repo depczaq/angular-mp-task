@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'app/core/authentication.service';
+import { AuthenticationService } from 'app/core/authentication/authentication.service';
 
 @Component({
   selector: 'app-login-page',

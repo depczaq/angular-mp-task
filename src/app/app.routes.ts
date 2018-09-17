@@ -1,10 +1,10 @@
-import { AuthenticationGuard } from './core/authentication.guard';
 import { Routes } from '@angular/router';
+import { AuthenticationGuard } from 'app/core/authentication/authentication.guard';
 import { PageNotFoundComponent } from 'app/core/page-not-found/page-not-found.component';
 import { CourseEditComponent } from 'app/courses/course-edit/course-edit.component';
+import { CourseResolver } from 'app/courses/course-resolver.service';
 import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
 import { LoginPageComponent } from 'app/login/login-page/login-page.component';
-import { CourseResolver } from './courses/course-resolver.service';
 
 export const ROUTES: Routes = [
     // default route

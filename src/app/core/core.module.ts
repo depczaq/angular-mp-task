@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { AuthenticationService } from 'app/core/authentication.service';
+import { AuthenticationService } from 'app/core/authentication/authentication.service';
 import { BreadcrumbsComponent } from 'app/core/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from 'app/core/footer/footer.component';
 import { HeaderComponent } from 'app/core/header/header.component';

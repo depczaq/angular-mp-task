@@ -1,8 +1,7 @@
 import { ApiCourse } from './api-course.model';
 import { BasicCourse } from './basic-course.model';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { USER_TOKEN_KEY } from 'app/core/authentication.service';
 import { Course } from 'app/courses/course.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry, tap } from 'rxjs/operators';
