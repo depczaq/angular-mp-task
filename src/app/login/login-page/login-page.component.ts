@@ -23,7 +23,7 @@ export class LoginPageComponent {
     this.validatePassword(this.password);
 
     if (!this.invalidUsername && !this.invalidPassword) {
-      this.authService.logIn(this.username, this.password)
+      this.authService.logIn({ login: this.username, password: this.password })
         .subscribe(() => this.loginSuccesful(), () => this.loginError());
     }
   }

@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthenticationCredentials } from 'app/core/authentication/credentials.model';
 import { User } from 'app/core/user.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, mapTo, retry, tap } from 'rxjs/operators';
+import { catchError, mapTo, retry, tap } from 'rxjs/operators';
 
 export const USER_TOKEN_KEY = 'userToken';
 
@@ -18,7 +19,9 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public logIn(login: string, password: string): Observable<boolean> {
+  public logIn(credentials: AuthenticationCredentials): Observable<boolean> {
+    const { login, password } = credentials;
+
     return this.httpClient.post<any>(LOGIN_URL, { login, password })
       .pipe(
         tap((response) => localStorage.setItem(USER_TOKEN_KEY, response.token)),
